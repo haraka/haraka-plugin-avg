@@ -1,79 +1,57 @@
-[![Unix Build Status][ci-img]][ci-url]
-[![Windows Build Status][ci-win-img]][ci-win-url]
+[![CI Test Status][ci-img]][ci-url]
 [![Code Climate][clim-img]][clim-url]
+
 [![NPM][npm-img]][npm-url]
 
-# haraka-plugin-template
+# haraka-plugin-avg
 
-Clone me, to create a new plugin!
+## avg - Anti-Virus scanner
 
-# Template Instructions
+Implement virus scanning with AVG's TCPD daemon, available for Linux/FreeBSD. AVG linux is [free for personal or commercial use](http://www.avg.com/gb-en/faq.pnuid-faq_v3_linux) and can be downloaded from [free.avg.com](http://free.avg.com/gb-en/download.prd-alf).
 
-These instructions will not self-destruct after use. Use and destroy.
+Messages that AVG detects as infected are rejected. Errors will cause the plugin to return temporary failures unless the defer options are changed (see below).
 
-See also, [How to Write a Plugin](https://github.com/haraka/Haraka/wiki/Write-a-Plugin) and [Plugins.md](https://github.com/haraka/Haraka/blob/master/docs/Plugins.md) for additional plugin writing information.
+## Configuration
 
-## Create a new repo for your plugin
+The following options can be set in avg.ini:
 
-Haraka plugins are named like `haraka-plugin-something`. All the namespace after `haraka-plugin-` is yours for the taking. Please check the [Plugins](https://github.com/haraka/Haraka/blob/master/Plugins.md) page and a Google search to see what plugins already exist.
+- port (default: 54322)
 
-Once you've settled on a name, create the GitHub repo. On the repo's main page, click the _Clone or download_ button and copy the URL. Then paste that URL into a local ENV variable with a command like this:
+  TCP port to communicate with the AVG TCPD on.
 
-```sh
-export MY_GITHUB_ORG=haraka
-export MY_PLUGIN_NAME=haraka-plugin-SOMETHING
-```
+- tmpdir (default: /tmp)
 
-Clone and rename the template repo:
+  AVG TCPD requires that the message be written to disk and scanned. This setting configures where any temporary files are written to. After scanning, the temporary files are automatically removed.
 
-```sh
-git clone git@github.com:haraka/haraka-plugin-template.git
-mv haraka-plugin-template $MY_PLUGIN_NAME
-cd $MY_PLUGIN_NAME
-git remote rm origin
-git remote add origin "git@github.com:$MY_GITHUB_ORG/$MY_PLUGIN_NAME.git"
-```
+- connect_timeout (default: 10)
 
-Now you'll have a local git repo to begin authoring your plugin
+  Maximum seconds to wait for the socket to connect. Connections taking longer will cause a temporary failure to be sent to the remote MTA.
 
-## rename boilerplate
+- session_timeout
 
-Replaces all uses of the word `template` with your plugin's name.
+  Maximum number of seconds to wait for a reply to a command before failing. A timeout will cause a temporary failure to be sent to the remote MTA.
 
-./redress.sh [something]
+- [defer]
 
-You'll then be prompted to update package.json and then force push this repo onto the GitHub repo you've created earlier.
+By default, this plugin defers when errors or timeouts are encountered. To
+fail open (let messages pass when errors are enounctered), set the error
+and/or timeout values to false.
 
+    [defer]
+    error=true
+    timeout=true
 
-# Add your content here
+cp node_modules/haraka-plugin-avg/config/avg.ini config/avg.ini
+$EDITOR config/avg.ini
 
-## INSTALL
-
-```sh
-cd /path/to/local/haraka
-npm install haraka-plugin-template
-echo "template" >> config/plugins
-service haraka restart
-```
-
-### Configuration
-
-If the default configuration is not sufficient, copy the config file from the distribution into your haraka config dir and then modify it:
-
-```sh
-cp node_modules/haraka-plugin-template/config/template.ini config/template.ini
-$EDITOR config/template.ini
-```
 
 ## USAGE
 
 
 <!-- leave these buried at the bottom of the document -->
-[ci-img]: https://github.com/haraka/haraka-plugin-template/workflows/Plugin%20Tests/badge.svg
-[ci-url]: https://github.com/haraka/haraka-plugin-template/actions?query=workflow%3A%22Plugin+Tests%22
-[ci-win-img]: https://github.com/haraka/haraka-plugin-template/workflows/Plugin%20Tests%20-%20Windows/badge.svg
-[ci-win-url]: https://github.com/haraka/haraka-plugin-template/actions?query=workflow%3A%22Plugin+Tests+-+Windows%22
-[clim-img]: https://codeclimate.com/github/haraka/haraka-plugin-template/badges/gpa.svg
-[clim-url]: https://codeclimate.com/github/haraka/haraka-plugin-template
-[npm-img]: https://nodei.co/npm/haraka-plugin-template.png
-[npm-url]: https://www.npmjs.com/package/haraka-plugin-template
+[ci-img]: https://github.com/haraka/haraka-plugin-avg/actions/workflows/ci.yml/badge.svg
+[ci-url]: https://github.com/haraka/haraka-plugin-avg/actions/workflows/ci.yml
+[clim-img]: https://codeclimate.com/github/haraka/haraka-plugin-avg/badges/gpa.svg
+[clim-url]: https://codeclimate.com/github/haraka/haraka-plugin-avg
+[npm-img]: https://nodei.co/npm/haraka-plugin-avg.png
+[npm-url]: https://www.npmjs.com/package/haraka-plugin-avg
