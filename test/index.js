@@ -1,7 +1,6 @@
 const assert = require('node:assert/strict')
 const { beforeEach, describe, it } = require('node:test')
 
-// npm modules
 const fixtures = require('haraka-test-fixtures')
 
 beforeEach(function () {
@@ -23,13 +22,13 @@ describe('load_avg_ini', function () {
 
 describe('uses text fixtures', function () {
   it('sets up a connection', function () {
-    this.connection = fixtures.connection.createConnection({})
+    this.connection = fixtures.connection.createConnection()
     assert.ok(this.connection.server)
   })
 
   it('sets up a transaction', function () {
-    this.connection = fixtures.connection.createConnection({})
-    this.connection.transaction = fixtures.transaction.createTransaction({})
+    this.connection = fixtures.connection.createConnection()
+    this.connection.transaction = fixtures.transaction.createTransaction()
     assert.ok(this.connection.transaction.header)
   })
 })
