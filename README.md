@@ -1,8 +1,6 @@
 [![CI Test Status][ci-img]][ci-url]
 [![Code Climate][clim-img]][clim-url]
 
-[![NPM][npm-img]][npm-url]
-
 # haraka-plugin-avg
 
 ## avg - Anti-Virus scanner
@@ -44,14 +42,11 @@ and/or timeout values to false.
 cp node_modules/haraka-plugin-avg/config/avg.ini config/avg.ini
 $EDITOR config/avg.ini
 
-
 ## USAGE
 
-
 <!-- leave these buried at the bottom of the document -->
+
 [ci-img]: https://github.com/haraka/haraka-plugin-avg/actions/workflows/ci.yml/badge.svg
 [ci-url]: https://github.com/haraka/haraka-plugin-avg/actions/workflows/ci.yml
 [clim-img]: https://codeclimate.com/github/haraka/haraka-plugin-avg/badges/gpa.svg
 [clim-url]: https://codeclimate.com/github/haraka/haraka-plugin-avg
-[npm-img]: https://nodei.co/npm/haraka-plugin-avg.png
-[npm-url]: https://www.npmjs.com/package/haraka-plugin-avg
