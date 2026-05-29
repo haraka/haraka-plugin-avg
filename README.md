@@ -1,7 +1,6 @@
-[![CI Test Status][ci-img]][ci-url]
-[![Code Climate][clim-img]][clim-url]
-
 # haraka-plugin-avg
+
+[![Test][ci-img]][ci-url] [![Cover][cov-img]][cov-url] [![Qlty][qlty-img]][qlty-url]
 
 ## avg - Anti-Virus scanner
 
@@ -48,5 +47,7 @@ $EDITOR config/avg.ini
 
 [ci-img]: https://github.com/haraka/haraka-plugin-avg/actions/workflows/ci.yml/badge.svg
 [ci-url]: https://github.com/haraka/haraka-plugin-avg/actions/workflows/ci.yml
-[clim-img]: https://codeclimate.com/github/haraka/haraka-plugin-avg/badges/gpa.svg
-[clim-url]: https://codeclimate.com/github/haraka/haraka-plugin-avg
+[cov-img]: https://codecov.io/github/haraka/haraka-plugin-avg/coverage.svg
+[cov-url]: https://codecov.io/github/haraka/haraka-plugin-avg
+[qlty-img]: https://qlty.sh/gh/haraka/projects/haraka-plugin-avg/maintainability.svg
+[qlty-url]: https://qlty.sh/gh/haraka/projects/haraka-plugin-avg

@@ -1,10 +1,10 @@
 const assert = require('node:assert/strict')
 const { beforeEach, describe, it } = require('node:test')
 
-const fixtures = require('haraka-test-fixtures')
+const { makeConnection, makePlugin } = require('haraka-test-fixtures')
 
 beforeEach(function () {
-  this.plugin = new fixtures.plugin('avg')
+  this.plugin = makePlugin('avg', { register: false })
 })
 
 describe('avg', function () {
@@ -22,13 +22,12 @@ describe('load_avg_ini', function () {
 
 describe('uses text fixtures', function () {
   it('sets up a connection', function () {
-    this.connection = fixtures.connection.createConnection()
+    this.connection = makeConnection()
     assert.ok(this.connection.server)
   })
 
   it('sets up a transaction', function () {
-    this.connection = fixtures.connection.createConnection()
-    this.connection.transaction = fixtures.transaction.createTransaction()
+    this.connection = makeConnection({ withTxn: true })
     assert.ok(this.connection.transaction.header)
   })
 })
